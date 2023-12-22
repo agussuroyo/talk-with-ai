@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# ChatGPT with Voice Command in React JS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to ChatGPT with Voice Command, a React JS application that integrates the power of ChatGPT with voice commands for a seamless conversational experience.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+To install the ChatGPT with Voice Command, use the following npm command:
 
-### `npm start`
+```bash
+npm install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This will install all the necessary dependencies for the project.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setting up Environment Variables
 
-### `npm test`
+Before running the application, make sure to set up your environment variables. Create a `.env` file in the root of the project and include the following:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```env
+REACT_APP_OPENAI_API_KEY=your_openai_api_key_here
+```
 
-### `npm run build`
+You can find an example in the `.env.example` file. Replace `your_openai_api_key_here` with your actual OpenAI GPT API key.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Running the Application
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Once the environment variables are set up, you can run the application using the following npm command:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+This will start the development server, and you can access the application in your web browser at [http://localhost:3000](http://localhost:3000).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## **Important Notice: Learning Purpose Only**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**This program is intended for learning purposes only.**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Use it at your own risk. No guarantees or warranties are provided.**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## How to Use
 
-## Learn More
+1. Open the application in your web browser.
+2. Use the chat interface to interact with ChatGPT.
+3. Enable voice command by clicking on the microphone icon.
+4. Speak your commands or messages clearly into the microphone.
+5. Enjoy a hands-free and interactive conversation with ChatGPT.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Troubleshooting
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you encounter any issues or have questions, please refer to the [issue tracker](https://github.com/agussuroyo/talk-with-ai/issues) on the project's GitHub repository.
 
-### Code Splitting
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Feel free to contribute to the development of this project by submitting issues or pull requests. Your feedback and contributions are highly appreciated.
 
-### Analyzing the Bundle Size
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This project is licensed under the [MIT License](LICENSE). Feel free to use and modify the code according to your needs.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thank you for using ChatGPT with Voice Command in React JS!
