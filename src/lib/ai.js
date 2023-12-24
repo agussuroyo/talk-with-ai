@@ -1,5 +1,6 @@
 import OpenAI from "openai"
 import { useEffect, useState, useRef } from "react";
+import functions from "./functions";
 
 export const openai = new OpenAI({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -31,7 +32,7 @@ export const useAI = ({ command = '', voice = 'echo' }) => {
                     return { ...s, assistant: r.data[0] || null }
                 })
             })
-        }        
+        }
     }, [])
 
     // 2. use thread and create if not exists
@@ -80,6 +81,28 @@ export const useAI = ({ command = '', voice = 'echo' }) => {
                 .then((r) => {
                     if (r.status === 'completed') {
                         setState((prevState) => ({ ...prevState, runIsComplete: true }));
+                    } else if (r.status === 'requires_action') {
+                        // do nothing
+                        const tool = r.required_action?.submit_tool_outputs?.tool_calls?.[0] || null;
+                        const args = JSON.parse(tool?.function?.arguments || '{}');
+                        const methodName = tool?.function?.name || '';
+                        const toolCallId = tool?.id || null;
+                        if (methodName) {
+                            // TODO: need bulk submit tool outputs
+                            functions[methodName]?.apply(null, [args]).then((r) => {
+                                const output = {
+                                    tool_call_id: toolCallId,
+                                    output: r
+                                }
+                                openai.beta.threads.runs.submitToolOutputs(thread.id, run.id, {
+                                    tool_outputs: [output]
+                                }).finally((r) => {
+                                    timeout = setTimeout(() => {
+                                        setState((prevState) => ({ ...prevState, countOfRefreshRun: countOfRefreshRun + 1 }));
+                                    }, 1000)
+                                })
+                            });
+                        }
                     } else {
                         timeout = setTimeout(() => {
                             setState((prevState) => ({ ...prevState, countOfRefreshRun: countOfRefreshRun + 1 }));
