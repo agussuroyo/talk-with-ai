@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { useAI } from './lib/ai';
 import { useEffect, useRef, useState } from 'react';
+import md from 'markdown-it';
 
 function App() {
+  const markdown = md();
   const { browserSupportsSpeechRecognition, listening, transcript } = useSpeechRecognition();
 
   const [command, setCommand] = useState('');
@@ -51,19 +52,34 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Is Listening: {listening ? 'true' : 'false'}</p>
-        {!listening && (
-          <button onClick={SpeechRecognition.startListening}>Listen</button>
-        )}
-        <label>Command:</label>
-        <p>{transcript}</p>
-        <label>Answer:</label>
-        <p>{messageText}</p>
-      </header>
-    </div>
+    <>
+      <div className="voice-chat-container">
+        
+        <div className="ai-face"></div>
+
+        <div className="button-container">
+          <label className="button p-2 px-4 rounded-full cursor-pointer" onClick={SpeechRecognition.startListening}>{listening ? 'Listening' : 'Listen'}</label>
+        </div>
+
+        <div className="command-section">
+          <label className="block text-gray-700">Command:</label>
+          <input
+            type="text"
+            name="command"
+            className="w-full p-2 mt-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            defaultValue={transcript}
+            readOnly
+          />
+        </div>
+
+        <div className="response-section">
+          <p className="text-gray-800">AI Response:</p>
+          <p className="text-gray-600" dangerouslySetInnerHTML={{ __html: markdown.render(messageText) }}></p>
+        </div>
+
+      </div>
+    </>
+
   );
 }
 

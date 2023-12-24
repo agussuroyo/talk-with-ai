@@ -1,38 +1,65 @@
-.App {
-  text-align: center;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Add any additional custom styles here */
+body {
+  background-color: #f4f4f4; /* Light Gray */
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.ai-face {
+  width: 100px; /* Adjust the size accordingly */
+  height: 100px; /* Adjust the size accordingly */
+  background-image: url('logo.svg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 20px rgba(74, 85, 104, 0.7); /* Adjust the shadow color and intensity */
+  animation: rotateLogo 5s linear infinite; /* Add animation */
+  z-index: 1;
 }
 
-@keyframes App-logo-spin {
+@keyframes rotateLogo {
   from {
-    transform: rotate(0deg);
+      transform: translateX(-50%) rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+      transform: translateX(-50%) rotate(360deg);
   }
+}
+
+.voice-chat-container {
+  position: relative;
+  max-width: 800px; /* Adjust the width as needed */
+  width: 600px;
+  padding: 20px;
+  background-color: #ffffff; /* White */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 0;
+  margin-top: 100px;
+}
+
+.button {
+  background-color: #4a5568; /* Gray */
+  color: #ffffff; /* White */
+}
+
+.command-section {
+  margin-top: 20px;
+}
+
+.response-section {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #edf2f7; /* Light Gray */
+  border-radius: 5px;
 }
