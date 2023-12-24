@@ -1,5 +1,5 @@
 import OpenAI from "openai"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export const openai = new OpenAI({
     apiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -22,17 +22,23 @@ export const useAI = ({ command = '', voice = 'echo' }) => {
     const { assistant, thread, run, countOfRefreshRun, messages, message, messageText, runIsComplete } = state
 
     // 1. prepare assistant
+    const didAssistant = useRef(false)
     useEffect(() => {
-        openai.beta.assistants.list().then((r) => {
-            setState((s) => {
-                return { ...s, assistant: r.data[0] || null }
+        if (!didAssistant.current) {
+            didAssistant.current = true
+            openai.beta.assistants.list().then((r) => {
+                setState((s) => {
+                    return { ...s, assistant: r.data[0] || null }
+                })
             })
-        })
+        }        
     }, [])
 
     // 2. use thread and create if not exists
+    const didThread = useRef(false)
     useEffect(() => {
-        if (assistant) {
+        if (assistant && !didThread.current) {
+            didThread.current = true
             openai.beta.threads.create().then((th) => setState((prevState) => ({ ...prevState, thread: th })));
         }
     }, [assistant])
@@ -116,7 +122,7 @@ export const useAI = ({ command = '', voice = 'echo' }) => {
 
     // 8. turn into blob audio
     useEffect(() => {
-        if (messageText) {
+        if (messageText && voice) {
             openai.audio.speech.create({
                 model: "tts-1",
                 voice: voice,
@@ -150,7 +156,7 @@ export const useAI = ({ command = '', voice = 'echo' }) => {
                     setState((prevState) => ({ ...prevState, messageBlob: blob, messageObjectUrl: url }));
                 })
         }
-    }, [messageText])
+    }, [messageText, voice])
 
     return state
 }
